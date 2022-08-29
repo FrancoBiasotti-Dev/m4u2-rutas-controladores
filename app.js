@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index'); // Este es Inicio. Se borra el usersRouter de abajo si no se usa
+var lasChacrasRouter = require('./routes/las-chacras');
+var contactoRouter = require('./routes/contacto');
+
 
 var app = express();
 
@@ -19,8 +21,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', indexRouter); // Este es Inicio. Se borra el usersRouter de abajo si no se usa. // Metodo Controlador
+app.use('/las-chacras', lasChacrasRouter); // Metodo Controlador
+app.use('/contacto', contactoRouter); // Metodo Controlador
+
+app.get('/cabanas', function(req,res){
+  res.send('Bienvenido a la pagina de Cabañas')
+}) // Metodo Ruta
+
+app.get('/servicios', function(req,res){
+  res.send('Bienvenido a la pagina de Servicios')
+}) // Metodo Ruta
+
+app.get('/galeria', function(req,res){
+  res.send('Bienvenido a la pagina de Galeria')
+}) // Metodo Ruta
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
